@@ -7,8 +7,8 @@
     <script>
         function createBinaryArray () {
           let binaryArray = document.querySelectorAll('.binary')
-          binaryArray.forEach(function (binary) {
-            binary.value = getBinary()
+          binaryArray.forEach(function (el) {
+            el.value = getBinary()
           })
         }
 
@@ -22,14 +22,45 @@
           }
           return binary
         }
+        
+        function checkAnswer () {
+          let answer = binary2Decimal()
+          let user_answer = document.querySelector('#answer').value
+          if (user_answer === '') {
+            window.alert('回答を入力してください！！！！！')
+            return false
+          }
+          user_answer = Number(user_answer)
+          let result = ''
+          if (answer === user_answer) {
+            result = '正解！'
+          } else {
+            result = 'ザンネーン'
+          }
+          document.querySelector('#result').innerHTML = result
+        }
+                
+        function binary2Decimal () {
+          let binaryArray = document.querySelectorAll('.binary')
+          let maxDigit = binaryArray.length
+          let decimal = 0
+          binaryArray.forEach(function (el, i) {
+            decimal += el.value * (2 ** (maxDigit - i - 1))
+          })
+          console.log(decimal)
+          return decimal
+        }
+        window.addEventListener('load', function () {
+          createBinaryArray()
+        })
     </script>
 </head>
 
 <body>
-  <input type="text" class="binary" />
-  <input type="text" class="binary" />
-  <input type="text" class="binary" />
-  <input type="text" class="binary" />
+  <input type="text" class="binary" disabled="disabled" />
+  <input type="text" class="binary" disabled="disabled" />
+  <input type="text" class="binary" disabled="disabled" />
+  <input type="text" class="binary" disabled="disabled" />
   <button type="button" onclick="createBinaryArray()">Create</button>
   <br />
   <label for="answer">Answer: </label>
