@@ -6,18 +6,22 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script>
         function button1Pressed () {
-          document.querySelector('#result').innerHTML = "Hello, world!"
+          let x = document.querySelector('#tf1').value
+          x = Number(x)
+          let y = document.querySelector('#tf2').value
+          y = Number(y)
+          document.querySelector('#tf3').value = x + y
         }
     </script>
 </head>
 
 <body>
   <h1>XXXX</h1>
-  <input type="text">
+  <input type="text" id="tf1">
   <button type="button" onclick="button1Pressed()">+</button>
-  <input type="text">
+  <input type="text" id="tf2">
   =
-  <input type="text">
+  <input type="text" id="tf3">
   <hr />
   <p id="result">xxxx</p>
 </body>
