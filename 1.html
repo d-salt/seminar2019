@@ -6,12 +6,15 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script>
         function createBinaryArray () {
+          // 2進数表示用のテキストボックス要素全部とってくる
           let binaryArray = document.querySelectorAll('.binary')
+          // 2進数表示用のテキストボックスに0か1をいれる
           binaryArray.forEach(function (el) {
             el.value = getBinary()
           })
         }
 
+        // ランダムに0か1を返す
         function getBinary () {
           let random = Math.random()
           let binary = 0
@@ -24,34 +27,58 @@
         }
         
         function checkAnswer () {
+          // 答えを変数にいれる
           let answer = binary2Decimal()
+          // ユーザが入力した答えを変数に入れる
           let user_answer = document.querySelector('#answer').value
+          // 何も入力されてないときは答え合わせしない
           if (user_answer === '') {
             window.alert('回答を入力してください！！！！！')
             return false
           }
+          // 数値型にしないと正解と比較できない
           user_answer = Number(user_answer)
+          // 答え合わせ
           let result = ''
           if (answer === user_answer) {
             result = '正解！'
+            // 次の問題
+            init()
           } else {
             result = 'ザンネーン'
           }
+          // 結果表示
           document.querySelector('#result').innerHTML = result
         }
-                
+        
+        // 生成した2進数を10進数に変換して返す
         function binary2Decimal () {
+          // 2進数表示用テキストボックス要素を全部とってくる
           let binaryArray = document.querySelectorAll('.binary')
-          let maxDigit = binaryArray.length
+          // 最大次数（4bitなら2の3乗）
+          let maxOrder = binaryArray.length - 1
           let decimal = 0
+          let order = 0
           binaryArray.forEach(function (el, i) {
-            decimal += el.value * (2 ** (maxDigit - i - 1))
+            // とってきたテキストボックスは左から順番に0スタートのインデックスがついている（仕様）
+            // 最大次数から要素が何番目かを引けばその位は2の何乗かがわかる
+            order = maxOrder - i
+            // それぞれの位を10進数に直して全部足す
+            decimal += el.value * (2 ** order)
           })
-          console.log(decimal)
           return decimal
         }
-        window.addEventListener('load', function () {
+        
+        function init () {
+          // 答えをリセット
+          document.querySelector('#answer').value = ''
+          // 新しい2進数を表示
           createBinaryArray()
+        }
+        
+        // 最初から2進数を表示しておく
+        window.addEventListener('load', function () {
+          init()
         })
     </script>
 </head>
