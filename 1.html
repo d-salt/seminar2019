@@ -6,10 +6,21 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script>
         function button1Pressed () {
-          window.alert("Hello, world!")
-        }
-        function button2Pressed () {
-          document.querySelector('#result').innerHTML = "Button 2 Pressed!"
+          let result = document.querySelector('#result')
+          let random = Math.random()
+          random = Math.floor(random * 100) // 乱数の範囲を0-99に調整
+          
+          // おみくじの結果を決める
+          let fortune = ''
+          if (random > 80) {
+            fortune = '大吉'
+          } else if (random > 20) {
+            fortune = '中吉'
+          } else {
+            fortune = '小吉'
+          }
+          // 結果を表示する
+          result.innerHTML = fortune
         }
     </script>
 </head>
