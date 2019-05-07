@@ -5,22 +5,36 @@
     <meta charset="utf-8">
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script>
-        function button1Pressed () {
-          window.alert("Hello, world!")
+        function createBinaryArray () {
+          let binaryArray = document.querySelectorAll('.binary')
+          binaryArray.forEach(function (binary) {
+            binary.value = getBinary()
+          })
+        }
+
+        function getBinary () {
+          let random = Math.random()
+          let binary = 0
+          if (random > 0.5) {
+            binary = 1
+          } else {
+            binary = 0
+          }
+          return binary
         }
     </script>
 </head>
 
 <body>
-  <input type="text" id="tf1" />
-  <input type="text" id="tf2" />
-  <input type="text" id="tf3" />
-  <input type="text" id="tf4" />
-  <button type="button" id="createBinary">Create</button>
+  <input type="text" class="binary" />
+  <input type="text" class="binary" />
+  <input type="text" class="binary" />
+  <input type="text" class="binary" />
+  <button type="button" onclick="createBinaryArray()">Create</button>
   <br />
   <label for="answer">Answer: </label>
   <input type="text" id="answer" />
-  <button type="button" id="checkAnswer">Check</button>
+  <button type="button" onclick="checkAnswer()">Check</button>
   <br />
   <p id="result"></p>
 </body>
