@@ -6,7 +6,13 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script>
         function button1Pressed () {
-          window.alert("Hello, world!")
+          let n = Number(window.prompt("1から入力した数までリストで表示します。"))
+          let html = '<ul>'
+          for (let i = 1; i <= n; i++) {
+            html += '<li>' + i + '</li>'
+          }
+          html += '</ul>'
+          document.querySelector('#result').innerHTML = html
         }
         function button2Pressed () {
           document.querySelector('#result').innerHTML = "Button 2 Pressed!"
@@ -18,7 +24,7 @@
     <button onclick="button1Pressed()">X</button>
     <button onclick="button2Pressed()">Y</button>
     <hr>
-    <p id="result"></p>
+    <div id="result"></div>
 </body>
 
 </html>
