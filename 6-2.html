@@ -20,6 +20,29 @@
             var objects = await connect(query);
             console.log(objects);
         }
+        
+        async function button2Pressed() {
+            var userid = document.getElementById('tf1').value;
+            var password = document.getElementById('tf2').value;
+
+            var sql = 'select * from Tweets order by time desc';
+            var query = {
+                db: 'creco18',
+                userid: userid,
+                password: password,
+                sql: sql
+            };
+
+            var objects = await connect(query);
+            console.log(objects);
+
+          let html = '<table border=1>'
+          objects.forEach(function (obj) {
+            html += '<tr><td>' + obj.name + '</td><td>' + obj.tweet + '</td><td>' + obj.time + '</td></tr>'
+          })
+          html += '</table>'
+          document.querySelector('#result').innerHTML = html
+        }
 
         function connect(query) {
             return new Promise(function (resolve) {
@@ -36,12 +59,13 @@
 <body>
     version 1.0
     <h1>まいついったー</h1>
-    <input id="tf1" value="t23921" type="textfield">ログイン名
+    <input id="tf1" value="a8115098" type="textfield">ログイン名
     <br>
     <input id="tf2" type="password">パスワード
     <br>
     <input id="tf3" type="textfield">
     <button onclick="button1Pressed()">tweet</button>
+    <button onclick="button2Pressed()">get tweet</button>
     <hr>
     <br>
     <p id="result"></p>
