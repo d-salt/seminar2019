@@ -1,24 +1,91 @@
 <!DOCTYPE HTML>
 <html>
 
-<head>
+  <head>
     <meta charset="utf-8">
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script>
-        function button1Pressed () {
-          window.alert("Hello, world!")
-        }
-        function button2Pressed () {
-          document.querySelector('#result').innerHTML = "Button 2 Pressed!"
-        }
-    </script>
-</head>
+  </head>
 
-<body>
+  <body>
     <button onclick="button1Pressed()">X</button>
     <button onclick="button2Pressed()">Y</button>
     <hr>
     <p id="result"></p>
-</body>
+
+    <script>
+      let timer = {}
+      timer.state = 0 // 0: stop, 1: countUP
+      timer.time = 0
+      timer.counter = null
+      timer.interval = 1
+      timer.showArea = document.querySelector('#result')
+
+      // setter
+      timer.setState = function (state) {
+        timer.state = state
+      }
+
+      timer.setTime = function (time) {
+        timer.time = time
+      }
+
+      // methods
+      timer.start = function () {
+        timer.counter = setInterval(timer.tick, 1000)
+      }
+      
+      timer.stop = function () {
+        clearInterval(timer.counter)
+      }
+      
+      timer.reset = function () {
+        timer.counter = null
+        timer.setTime(0)
+      }
+
+      timer.init = function () {
+        timer.setTime()
+      }
+      
+      timer.updateTime = function () {
+        timer.time += timer.interval
+      }
+      
+      timer.showTime = function () {
+        timer.showArea.innerHTML = timer.time
+      }
+      
+      timer.tick = function () {
+        timer.updateTime()
+        timer.showTime()
+      }
+      
+      function button1Pressed () {
+        switch(timer.state) {
+          case 0:
+            timer.start()
+            timer.setState(1)
+            break
+          case 1:
+            timer.stop()
+            timer.setState(0)
+            break
+        }
+      }
+      
+      function button2Pressed () {
+        switch (timer.state) {
+          case 0:
+            timer.reset()
+            timer.showTime()
+            break
+          case 1:
+            // do something...
+            break
+        }
+      }
+    </script>
+
+  </body>
 
 </html>
